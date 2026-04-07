@@ -1,31 +1,50 @@
 import java.util.Arrays;
 public class Train_App {
     public static void main(String[] args) {
+        System.out.println("============================================");
+        System.out.println(" UC19 - Binary Search for Bogie ID ");
+        System.out.println("============================================\n");
 
-        System.out.println("===============================================");
-        System.out.println(" UC17 - Sort Bogie Names using Arrays.sort() ");
-        System.out.println("===============================================\n");
+        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
 
-        // Array of bogie names
-        String[] bogieNames = {
-                "Sleeper",
-                "AC Chair",
-                "First Class",
-                "General",
-                "Luxury"
-        };
+        Arrays.sort(bogieIds);
 
-        // Display original array
-        System.out.println("Original Bogie Names:");
-        System.out.println(Arrays.toString(bogieNames));
+        String key = "BG309";
 
-        // Sorting using built-in method
-        Arrays.sort(bogieNames);
+        System.out.println("Sorted Bogie IDs:");
+        for (String id : bogieIds) {
+            System.out.println(id);
+        }
+        System.out.println();
 
-        // Display sorted array
-        System.out.println("\nSorted Bogie Names (Alphabetical):");
-        System.out.println(Arrays.toString(bogieNames));
+        int resultIndex = performBinarySearch(bogieIds, key);
 
-        System.out.println("\nUC17 sorting completed...");
+        if (resultIndex != -1) {
+            System.out.println("Bogie " + key + " found using Binary Search.");
+        } else {
+            System.out.println("Bogie " + key + " not found.");
+        }
+
+        System.out.println("\nUC19 search completed.");
+    }
+
+    public static int performBinarySearch(String[] arr, String key) {
+        int low = 0;
+        int high = arr.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int comparison = key.compareTo(arr[mid]);
+
+            if (comparison == 0) {
+                return mid;
+            } else if (comparison > 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return -1;
     }
 }
